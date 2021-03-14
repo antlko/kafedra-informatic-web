@@ -1,11 +1,9 @@
 import './App.css';
 import EditorJs from 'react-editor-js';
 import React from "react";
-import {EDITOR_JS_TOOLS} from "./scripts/editor";
+import {EDITOR_JS_TOOLS} from "./scripts/Editor";
 
 function App() {
-
-
 
     return (
         <div className="App">
