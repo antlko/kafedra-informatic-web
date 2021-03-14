@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import EditorJs from 'react-editor-js';
+import React from "react";
+import {EDITOR_JS_TOOLS} from "./scripts/editor";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-        API host: {process.env.REACT_APP_API_HOST}
-      </header>
-    </div>
-  );
+
+
+
+    return (
+        <div className="App">
+            <EditorJs tools={EDITOR_JS_TOOLS}
+                      data={{
+                          blocks: [
+                              {
+                                  type: "paragraph",
+                                  data: {
+                                      text:
+                                          "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text."
+                                  }
+                              },
+                          ],
+                      }}/>
+        </div>
+    );
 }
 
 export default App;
