@@ -1,7 +1,7 @@
 import './App.css';
 import EditorJs from 'react-editor-js';
 import React from "react";
-import {EDITOR_JS_TOOLS} from "./scripts/Editor";
+import {EDITOR_JS_TOOLS} from "./Scripts/Editor";
 
 function App() {
 
