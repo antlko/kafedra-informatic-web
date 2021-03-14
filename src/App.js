@@ -15,8 +15,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
         </a>
+        API host: {process.env.REACT_APP_API_HOST}
       </header>
     </div>
   );
