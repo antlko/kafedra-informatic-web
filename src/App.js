@@ -21,7 +21,6 @@ const defaultData = {
                 "caption": "Roadster // tesla.com",
                 "withBorder": false,
                 "withBackground": false,
-                "stretched": true
             }
         }
     ],
@@ -35,12 +34,6 @@ function App() {
                 tools={EDITOR_JS_TOOLS}
                 holder={"editor"}
                 readOnly={false}
-            />
-            <Editor
-                data={defaultData}
-                tools={EDITOR_JS_TOOLS}
-                holder={"editor"}
-                readOnly={true}
             />
         </div>
     );
