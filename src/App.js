@@ -1,7 +1,5 @@
 import './App.css';
 import React from "react";
-import {EDITOR_JS_TOOLS} from "./Scripts/Editor";
-import {Editor} from "./Editor";
 
 const defaultData = {
     blocks: [
@@ -29,12 +27,13 @@ const defaultData = {
 function App() {
     return (
         <div className="App">
-            <Editor
-                data={defaultData}
-                tools={EDITOR_JS_TOOLS}
-                holder={"editor"}
-                readOnly={false}
-            />
+
+            {/*<Editor*/}
+            {/*    data={defaultData}*/}
+            {/*    tools={EDITOR_JS_TOOLS}*/}
+            {/*    holder={"editor"}*/}
+            {/*    readOnly={false}*/}
+            {/*/>*/}
         </div>
     );
 }
