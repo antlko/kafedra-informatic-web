@@ -34,36 +34,38 @@ export default function LandingPage(props) {
       <Header
         color="transparent"
         routes={dashboardRoutes}
-        brand="Material Kit React"
+        brand="NURE INFORMATICS"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
+          height: 100,
           color: "white"
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/landing-bg.jpg")}>
+      <Parallax filter image={"assets/img/landing-bg.jpg"}>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
+            <GridItem xs={12} sm={12} md={8}>
+              <h1 className={classes.title}>122-Комп'ютерні науки</h1>
+              <h3 className={classes.title}>ОСВІТНЬО-ПРОФЕСІЙНА ПРОГРАМА "ІНФОРМАТИКА"</h3>
+              <h3 className={classes.title}>КАФЕДРА ІНФОРМАТИКИ</h3>
               <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+                  Факультет Інформаційно-аналітичних технологій та менеджменту
+              </h4>
+              <h4>
+                  Харківський національний університет радіоелектроніки
               </h4>
               <br />
               <Button
                 color="danger"
                 size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
+                href="https://www.youtube.com/watch?v=NXR3lSNoqxY&ab_channel=NURETV"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <i className="fas fa-play" />
-                Watch video
+                Дивитись відео
               </Button>
             </GridItem>
           </GridContainer>
