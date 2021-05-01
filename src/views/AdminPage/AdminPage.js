@@ -1,7 +1,12 @@
-import React from "react";
-import {Editor} from "../../Editor";
-import {EDITOR_JS_TOOLS} from "../../Scripts/Editor";
+import React, {useState} from "react";
 import {Container} from "@material-ui/core";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import CustomDropdown from "../../components/CustomDropdown/CustomDropdown";
+import Header from "../../components/Header/Header";
+import {makeStyles} from "@material-ui/core/styles";
+import styles from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle";
+import {AddLectureComponent} from "./LecturePages/AddLectureComponent";
 
 const defaultData = {
     blocks: [
@@ -26,18 +31,47 @@ const defaultData = {
     ],
 }
 
+const useStyles = makeStyles(styles);
+
 export const AdminPage = () => {
+
+    const classes = useStyles();
+
+    const [pageComponent, setPageComponent] = useState(null)
+
+    const updatePageComponent = (component) => {
+        setPageComponent(component)
+    }
 
     return (
         <div>
             <Container>
-                <h1>Admin Page</h1>
-                <Editor
-                    data={defaultData}
-                    tools={EDITOR_JS_TOOLS}
-                    holder={"editor"}
-                    readOnly={false}
+                <Header
+                    brand="Admin Panel"
+                    color="primary"
+                    leftLinks={
+                        <List className={classes.list}>
+                            <ListItem className={classes.listItem}>
+                                <CustomDropdown
+                                    buttonText="Преподаватели"
+                                    dropdownHeader="Меню Преподавателей"
+                                    buttonProps={{
+                                        className: classes.navLink,
+                                        color: "transparent"
+                                    }}
+                                    dropdownList={[
+                                        <div onClick={() => updatePageComponent(<AddLectureComponent/>)}
+                                             className={classes.dropdownLink}>
+                                            Добавить
+                                        </div>,
+                                    ]}
+
+                                />
+                            </ListItem>
+                        </List>
+                    }
                 />
+                {pageComponent === null ? "Dashboard main" : pageComponent}
             </Container>
         </div>
     )

@@ -34,7 +34,6 @@ export default function LoginPage(props) {
         const newSignupForm = loginForm
         newSignupForm[elem.id] = elem.value
         setLoginForm(newSignupForm)
-        console.log(loginForm)
     }
 
     const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");

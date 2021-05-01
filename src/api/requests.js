@@ -43,3 +43,27 @@ export const authRequest = async () => {
         return false
     })
 }
+
+export const addLectureRequest = (addLectureForm) => {
+    return async () => {
+        alert(addLectureForm.info_json)
+        await axios({
+            method: 'post',
+            url: process.env.REACT_APP_API_HOST + 'lectures',
+            data: addLectureForm,
+            headers: {
+                "Authorization": localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                alert("Lecture was added successfully!")
+            }
+        }).catch((err) => {
+            if (err.response === undefined) {
+                networkErrorMessage()
+            } else {
+                alert("Lecture cant be added")
+            }
+        })
+    };
+}
