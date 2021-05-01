@@ -15,6 +15,10 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/prod
 import Carousel from "react-material-ui-carousel";
 import {Paper} from "@material-ui/core";
 import Button from "../../../components/CustomButtons/Button";
+import icon1 from "../../../assets/img/common/icon1.jpg"
+import icon2 from "../../../assets/img/common/icon2.jpg"
+import icon3 from "../../../assets/img/common/icon3.jpg"
+import icon4 from "../../../assets/img/common/icon4.jpg"
 
 const useStyles = makeStyles(styles);
 
@@ -22,16 +26,20 @@ export default function ProductSection() {
 
     const items = [
         {
-            image: "https://lh5.googleusercontent.com/SAvBNSnlTa_J3jfVzYKzWt6yelsbnh74XZEnwju2k6MYW5itAU53Gmp0Zu_rAq7iFIw6nanyiuWwM3VkohHiWJQ=w16383"
+            key: 1,
+            image: icon1
         },
         {
-            image: "https://lh4.googleusercontent.com/T2qgxqVZ24FWZaHB117oBX3puk-h69Lt-t4WRAgfwj9W0SZghLrbTjjaUullW7BK-HZJv_KcGykaZO0UhjylCeo=w16383"
+            key: 2,
+            image: icon2
         },
         {
-            image: "https://lh6.googleusercontent.com/GNLXDA8ZAHcJsYEtFlTFZJYd1c9oEYzAbxefwC4WaNojSwnPjk3gf8Ew5QlQ35ui7nEhpT_XO2yiSa5Sj2ETEXM=w16383"
+            key: 3,
+            image: icon3,
         },
         {
-            image: "https://lh3.googleusercontent.com/gJ645LU7LwyEPN726Ghdp_vTmnQ5pt299EPjVtB4y7lFS_Bl3xqgfKUoh6wxzQhxbn_XLfZG4X0YoRPO34D7B44=w16383"
+            key: 4,
+            image: icon4,
         },
 
     ]
@@ -49,7 +57,7 @@ export default function ProductSection() {
                         <Carousel>
                             {
                                 items.map((item, i) =>
-                                    <Paper>
+                                    <Paper key={item.key}>
                                         <img src={item.image} alt={"photo"}/>
                                     </Paper>
                                 )
