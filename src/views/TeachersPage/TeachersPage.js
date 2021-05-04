@@ -30,50 +30,51 @@ export const TeachersPage = () => {
     const printTeachers = () => {
         return teachers !== null
             ? teachers.map(teacher => {
-                    return <div className={classes.section}>
-                        <GridContainer alignContent={"flex-start"}>
-                            <GridItem xs={12} sm={12} md={5}>
-                                <img
-                                    style={{
-                                        width: 400,
-                                        maxHeight: 400
-                                    }}
-                                    src={teacher.photo}
-                                    alt="Teacher photo"
-                                    className={classes.imgRoundedCircle + " " + classes.imgFluid}
-                                />
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={7} alignItems={"flex-start"}
-                                      style={{display: "flex", alignItems: "top"}}>
-                                <GridContainer alignContent={"flex-start"}>
-                                    <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
-                                        <h1>{teacher.name}</h1>
-                                    </GridItem>
-                                    <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
-                                        <h2>{teacher.description}</h2>
-                                    </GridItem>
-                                    <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
-                                        {printFullInfo(teacher)}
-                                    </GridItem>
-                                    <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
-                                        <h3>{teacher.email}</h3>
-                                    </GridItem>
-                                </GridContainer>
-                            </GridItem>
-                        </GridContainer>
-                    </div>
+                return <div className={classes.section}>
+                    <GridContainer justify="center">
+                        <GridItem xs={12} sm={12} md={5}>
+                            <img
+                                style={{
+                                    width: 400,
+                                    maxHeight: 400
+                                }}
+                                src={teacher.photo}
+                                alt="Teacher photo"
+                                className={classes.imgRoundedCircle + " " + classes.imgFluid}
+                            />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={7}
+                                  style={{display: "flex", alignItems: "top"}}>
+                            <GridContainer>
+                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
+                                    <h1>{teacher.name}</h1>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
+                                    <h2>{teacher.description}</h2>
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "center"}}
+                                          alignItems={"flex-start"}>
+                                    {printFullInfo(teacher)}
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
+                                    <h3>{teacher.email}</h3>
+                                </GridItem>
+                            </GridContainer>
+                        </GridItem>
+                    </GridContainer>
+                </div>
             })
             : <div>Loading...</div>
     }
 
     const printFullInfo = (teacher) => {
         return teacher.info_json !== null ? (
-            <Editor
-                data={JSON.parse(teacher.info_json)}
-                tools={EDITOR_JS_TOOLS}
-                holder={"editor" + teacher.id}
-                readOnly={true}
-            />
+                <Editor
+                    data={JSON.parse(teacher.info_json)}
+                    tools={EDITOR_JS_TOOLS}
+                    holder={"editor" + teacher.id}
+                    readOnly={true}
+                />
         ) : <h4>404 Інформація відсутня</h4>
     }
 
