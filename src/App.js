@@ -7,6 +7,7 @@ import LandingPage from "./views/LandingPage/LandingPage";
 import {createBrowserHistory} from "history";
 import {authRequest} from "./api/requests";
 import Components from "./views/Components/Components";
+import {TeachersPage} from "./views/TeachersPage/TeachersPage";
 
 let hist = createBrowserHistory();
 
@@ -17,6 +18,7 @@ function App() {
                 <Switch>
                     <PrivateRoute path="/admin" component={AdminPage}/>
                     <Route path="/admin_informatics" component={LoginPage}/>
+                    <Route path="/teachers" component={TeachersPage}/>
                     <Route path="/" component={LandingPage}/>
                     <Route path="/info" component={Components}/>
                 </Switch>

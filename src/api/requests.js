@@ -46,7 +46,6 @@ export const authRequest = async () => {
 
 export const addLectureRequest = (addLectureForm) => {
     return async () => {
-        alert(addLectureForm.info_json)
         await axios({
             method: 'post',
             url: process.env.REACT_APP_API_HOST + 'admin/lectures',
@@ -64,6 +63,20 @@ export const addLectureRequest = (addLectureForm) => {
             } else {
                 alert("Lecture cant be added")
             }
+        })
+    };
+}
+
+export const getLectureRequest = () => {
+    return async () => {
+        return await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_HOST + 'lectures/findAll'
+        }).then((response) => {
+            return response
+        }).catch((err) => {
+            console.log("error getting teachers!", err)
+            return err
         })
     };
 }

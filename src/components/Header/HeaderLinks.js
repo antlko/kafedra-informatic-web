@@ -9,7 +9,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
 // @material-ui/icons
-
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
@@ -41,12 +40,12 @@ export default function HeaderLinks(props) {
                         color: "transparent"
                     }}
                     dropdownList={[
-                        <Link to="/" className={classes.dropdownLink}>
+                        <div className={classes.dropdownLink}>
                             Історія Кафедри
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
+                        </div>,
+                        <div className={classes.dropdownLink} onClick={() => window.location.href = "/teachers"}>
                             Колектив Кафедри
-                        </Link>,
+                        </div>,
                         <Link to="/" className={classes.dropdownLink}>
                             Міжнародна співпраця
                         </Link>,
