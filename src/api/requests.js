@@ -49,10 +49,10 @@ export const addLectureRequest = (addLectureForm) => {
         alert(addLectureForm.info_json)
         await axios({
             method: 'post',
-            url: process.env.REACT_APP_API_HOST + 'lectures',
+            url: process.env.REACT_APP_API_HOST + 'admin/lectures',
             data: addLectureForm,
             headers: {
-                "Authorization": localStorage.getItem("access_token"),
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
             }
         }).then((response) => {
             if (response.status === 200) {
