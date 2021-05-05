@@ -48,7 +48,7 @@ export const addLectureRequest = (addLectureForm) => {
     return async () => {
         await axios({
             method: 'post',
-            url: process.env.REACT_APP_API_HOST + 'admin/lectures',
+            url: process.env.REACT_APP_API_HOST + 'admin/teacher',
             data: addLectureForm,
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("access_token"),
@@ -71,7 +71,7 @@ export const getLectureRequest = () => {
     return async () => {
         return await axios({
             method: 'get',
-            url: process.env.REACT_APP_API_HOST + 'lectures/findAll'
+            url: process.env.REACT_APP_API_HOST + 'teachers/findAll'
         }).then((response) => {
             return response
         }).catch((err) => {
