@@ -9,9 +9,10 @@ import {makeStyles} from "@material-ui/core/styles";
 import styles from "../../../assets/jss/material-kit-react/views/loginPage";
 import GridContainer from "../../../components/Grid/GridContainer";
 import GridItem from "../../../components/Grid/GridItem";
-import Button from "../../../components/CustomButtons/Button";
 import FileBase64 from 'react-file-base64';
+import {useHistory} from "react-router-dom";
 import {addLectureRequest} from "../../../api/requests";
+import Button from "../../../components/CustomButtons/Button";
 
 const useStyles = makeStyles(styles);
 
@@ -32,9 +33,11 @@ const defaultData = {
     ],
 }
 
-export const AddLectureComponent = () => {
+export const AddTeachersComponent = () => {
 
     const classes = useStyles();
+
+    const history = useHistory();
 
     const [photo, setPhoto] = useState('')
 
@@ -70,16 +73,33 @@ export const AddLectureComponent = () => {
     }
 
     return (
-        <div className={"AddLectureComponent"}>
+        <div className={"AddTeachersComponent"}>
             <form className={classes.form}>
                 <h2>Добавление Преподавателей</h2>
                 <Button
                     color="primary"
                     target="_blank"
                     className={classes.form}
-                    onClick={addLectureRequest(addLectureForm)}
+                    onClick={() => {
+                        addLectureRequest(addLectureForm)().then((value => {
+                            history.push("/admin/teachers")
+                        }))
+                    }}
                 >
                     Сохранить
+                </Button>
+                <Button
+                    style={{
+                        marginLeft: 20
+                    }}
+                    color="secondary"
+                    target="_blank"
+                    className={classes.form}
+                    onClick={() => {
+                        history.push("/admin")
+                    }}
+                >
+                    Отмена
                 </Button>
                 <GridContainer justify="center">
                     <GridItem xs={12} sm={6} md={6}>

@@ -34,5 +34,8 @@ export const EDITOR_JS_TOOLS = {
     delimiter: Delimiter,
     inlineCode: InlineCode,
     simpleImage: SimpleImage,
-    paragraph: Paragraph
+    paragraph: {
+        class: Paragraph,
+        inlineToolbar: true,
+    },
 };

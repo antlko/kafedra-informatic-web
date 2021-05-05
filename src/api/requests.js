@@ -46,7 +46,7 @@ export const authRequest = async () => {
 
 export const addLectureRequest = (addLectureForm) => {
     return async () => {
-        await axios({
+        return await axios({
             method: 'post',
             url: process.env.REACT_APP_API_HOST + 'admin/teacher',
             data: addLectureForm,
@@ -71,11 +71,49 @@ export const getLectureRequest = () => {
     return async () => {
         return await axios({
             method: 'get',
-            url: process.env.REACT_APP_API_HOST + 'teachers/findAll'
+            url: process.env.REACT_APP_API_HOST + 'teachers'
         }).then((response) => {
             return response
         }).catch((err) => {
             console.log("error getting teachers!", err)
+            return err
+        })
+    };
+}
+
+export const deleteTeacherRequest = (teacherID) => {
+    return async () => {
+        await axios({
+            method: 'delete',
+            url: process.env.REACT_APP_API_HOST + 'admin/teacher/delete?id=' + teacherID,
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                alert("Lecture was removed successfully!")
+            }
+        }).catch((err) => {
+            if (err.response === undefined) {
+                networkErrorMessage()
+            } else {
+                alert("Lecture cant be removed")
+            }
+        })
+    };
+}
+
+export const getTeacherRequest = (teacherID) => {
+    return async () => {
+        return await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_HOST + 'teacher?id=' + teacherID
+        }).then((response) => {
+            if (response.status === 200) {
+                return response
+            }
+        }).catch((err) => {
+            console.log("error getting teacher ", err)
             return err
         })
     };
