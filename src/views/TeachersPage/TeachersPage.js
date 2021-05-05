@@ -28,7 +28,7 @@ export const TeachersPage = () => {
     }, []);
 
     const printTeachers = () => {
-        return teachers !== null
+        return teachers !== undefined && teachers !== null
             ? teachers.map(teacher => {
                 return <div className={classes.section}>
                     <GridContainer justify="center">
