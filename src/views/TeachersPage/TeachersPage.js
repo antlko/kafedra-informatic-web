@@ -18,7 +18,7 @@ export const TeachersPage = () => {
 
     const classes = useStyles();
 
-    const [teachers, setTeachers] = useState([]);
+    const [teachers, setTeachers] = useState(null);
 
     useEffect(() => {
         getLectureRequest()().then(value => {
