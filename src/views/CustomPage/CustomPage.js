@@ -23,7 +23,9 @@ export const CustomPage = (props) => {
 
     useEffect(() => {
         getCustomPageByURLRequest(url)().then(res => {
-            setInfoJson(res.data.info_json)
+            if(res.data !== undefined) {
+                setInfoJson(res.data.info_json)
+            }
         })
     }, [])
 
