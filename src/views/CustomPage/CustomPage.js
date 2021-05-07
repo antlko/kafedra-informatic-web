@@ -62,7 +62,10 @@ export const CustomPage = (props) => {
                 </div>
             </Parallax>
             <div className={classNames(classes.main, classes.mainRaised)}>
-                <GridContainer justify={"center"}>
+                <GridContainer justify={"center"} style={{
+                    paddingLeft:70,
+                    paddingRight:70,
+                }}>
                     <GridItem xs={12} sm={12} md={12}>
                         <CardBody>
                             {getEditorJS()}
