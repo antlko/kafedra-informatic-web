@@ -71,7 +71,7 @@ export const TeachersPage = () => {
             <Editor
                 data={JSON.parse(teacher.info_json)}
                 tools={EDITOR_JS_TOOLS}
-                holder={"editor" + teacher.id}
+                holder={"editor" + Date.now()}
                 readOnly={true}
             />
         ) : <h4>404 Інформація відсутня</h4>
