@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {deleteTeacherRequest, getAllCustomPagesDataRequest, getLectureRequest} from "../../../api/requests";
+import {
+    deleteCustomPageRequest,
+    deleteTeacherRequest,
+    getAllCustomPagesDataRequest,
+    getLectureRequest
+} from "../../../api/requests";
 import GridContainer from "../../../components/Grid/GridContainer";
 import GridItem from "../../../components/Grid/GridItem";
 import Button from "../../../components/CustomButtons/Button";
@@ -27,8 +32,8 @@ export const CustomPageListComponent = () => {
         })
     }
 
-    const removeTeacher = (id) => {
-        deleteTeacherRequest(id)().then(value => {
+    const removePage = (url) => {
+        deleteCustomPageRequest(url)().then(value => {
             updateCPages()
         })
     }
@@ -59,7 +64,7 @@ export const CustomPageListComponent = () => {
                                 color="danger"
                                 target="_blank"
                                 className={classes.form}
-                                onClick={() => removeTeacher(t.id)}
+                                onClick={() => removePage(encodeURIComponent(t.url))}
                             >
                                 Удалить
                             </Button>

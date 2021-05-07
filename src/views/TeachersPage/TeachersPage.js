@@ -18,7 +18,7 @@ export const TeachersPage = () => {
 
     const classes = useStyles();
 
-    const [teachers, setTeachers] = useState(null);
+    const [teachers, setTeachers] = useState([]);
 
     useEffect(() => {
         getLectureRequest()().then(value => {
@@ -27,7 +27,7 @@ export const TeachersPage = () => {
     }, []);
 
     const printTeachers = () => {
-        return teachers !== undefined && teachers !== null
+        return teachers !== undefined && teachers !== null && teachers.length > 0
             ? teachers.map(teacher => {
                 return <div className={classes.section}>
                     <GridContainer justify="center">
@@ -67,7 +67,7 @@ export const TeachersPage = () => {
     }
 
     const printFullInfo = (teacher) => {
-        return teacher.info_json !== null ? (
+        return teacher !== undefined && teacher !== null && teacher.info_json !== null && teacher.info_json !== '' ? (
             <Editor
                 data={JSON.parse(teacher.info_json)}
                 tools={EDITOR_JS_TOOLS}

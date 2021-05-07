@@ -220,3 +220,25 @@ export const getAllCustomPagesDataRequest = () => {
         })
     };
 }
+
+export const deleteCustomPageRequest = (url) => {
+    return async () => {
+        await axios({
+            method: 'delete',
+            url: process.env.REACT_APP_API_HOST + 'admin/custompage?url=' + url,
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                alert("Page was removed successfully!")
+            }
+        }).catch((err) => {
+            if (err.response === undefined) {
+                networkErrorMessage()
+            } else {
+                alert("Page cant be removed")
+            }
+        })
+    };
+}
