@@ -14,7 +14,14 @@ import SimpleImage from "@editorjs/simple-image";
 import Paragraph from "editorjs-paragraph-with-alignment"
 
 export const EDITOR_JS_TOOLS = {
-    embed: Embed,
+    embed: {
+        class: Embed,
+        config: {
+            services: {
+                youtube: true,
+            },
+        },
+    },
     table: Table,
     marker: Marker,
     list: List,

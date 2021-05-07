@@ -118,3 +118,105 @@ export const getTeacherRequest = (teacherID) => {
         })
     };
 }
+
+export const getHeadersRequest = () => {
+    return async () => {
+        return await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_HOST + 'header'
+        }).then((response) => {
+            if (response.status === 200) {
+                return response
+            }
+        }).catch((err) => {
+            console.log("error getting header ", err)
+            return err
+        })
+    };
+}
+
+export const saveHeaderRequest = (headerArray) => {
+    return async () => {
+        const jsonRequest = {
+            data: headerArray
+        }
+        return await axios({
+            method: 'post',
+            url: process.env.REACT_APP_API_HOST + 'admin/header',
+            data: JSON.stringify(jsonRequest),
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                alert("Header was added successfully!")
+            }
+        }).catch((err) => {
+            if (err.response === undefined) {
+                networkErrorMessage()
+            } else {
+                console.log(err)
+                alert("Header cant be added")
+            }
+        })
+    };
+}
+
+export const saveCustomPageRequest = (dataForm) => {
+    return async () => {
+        return await axios({
+            method: 'post',
+            url: process.env.REACT_APP_API_HOST + 'admin/custompage',
+            data: dataForm,
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                alert("Custom page was added successfully!")
+            }
+        }).catch((err) => {
+            if (err.response === undefined) {
+                networkErrorMessage()
+            } else {
+                console.log(err)
+                alert("Header cant be added")
+            }
+        })
+    };
+}
+
+export const getCustomPageByURLRequest = (urlField) => {
+    return async () => {
+        return await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_HOST + 'custompage?url=' + encodeURIComponent(urlField)
+        }).then((response) => {
+            if (response.status === 200) {
+                return response
+            }
+        }).catch((err) => {
+            console.log("error getting page ", err)
+            return err
+        })
+    };
+}
+
+export const getAllCustomPagesDataRequest = () => {
+    return async () => {
+        return await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_HOST + 'admin/custompages',
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            }
+        }).then((response) => {
+            if (response.status === 200) {
+                return response
+            }
+        }).catch((err) => {
+            console.log("error getting pages ", err)
+            return err
+        })
+    };
+}

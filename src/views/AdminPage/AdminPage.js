@@ -8,13 +8,14 @@ import {makeStyles} from "@material-ui/core/styles";
 import styles from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle";
 import {AddTeachersComponent} from "./TeachersPages/AddTeachersComponent";
 import {TeachersComponent} from "./TeachersPages/TeachersComponent";
-import {BrowserRouter, Link, Switch, useHistory} from "react-router-dom";
+import {BrowserRouter, Link, Switch} from "react-router-dom";
 import {PrivateRoute} from "../../App";
-import {createBrowserHistory} from "history";
 import {UpdateTeacherComponent} from "./TeachersPages/UpdateTeacherComponent";
 import Button from "../../components/CustomButtons/Button";
-
-let hist = createBrowserHistory();
+import {CustomPage} from "./CustomPage/CustomPage";
+import {EditHeaderComponent} from "./HeaderPages/EditHeaderComponent";
+import {CustomPageListComponent} from "./CustomPage/CustomPageListComponent";
+import {UpdateCustomPage} from "./CustomPage/UpdateCustomPage";
 
 const useStyles = makeStyles(styles);
 
@@ -34,9 +35,12 @@ export const AdminPage = () => {
                                 <ListItem className={classes.listItem}>
                                     <Link to={"/admin"}>
                                         <Button
-                                            color="white"
+                                            color="primary"
                                             target="_blank"
-                                            className={classes.navLink}
+                                            buttonProps={{
+                                                className: classes.navLink,
+                                                color: "transparent"
+                                            }}
                                         >
                                             Главная
                                         </Button>
@@ -65,6 +69,33 @@ export const AdminPage = () => {
 
                                     />
                                 </ListItem>
+                                <ListItem className={classes.listItem}>
+                                    <CustomDropdown
+                                        buttonText="Новая Страница"
+                                        dropdownHeader="Меню Создания новых страниц"
+                                        buttonProps={{
+                                            className: classes.navLink,
+                                            color: "transparent"
+                                        }}
+                                        dropdownList={[
+                                            <Link to={"/admin/custom/header"}>
+                                                <div className={classes.dropdownLink}>
+                                                    Навбар (Хидер)
+                                                </div>
+                                            </Link>,
+                                            <Link to={"/admin/custom/create"}>
+                                                <div className={classes.dropdownLink}>
+                                                    Создать
+                                                </div>
+                                            </Link>,
+                                            <Link to={"/admin/custom"}>
+                                                <div className={classes.dropdownLink}>
+                                                    Обновить/Удалить
+                                                </div>
+                                            </Link>,
+                                        ]}
+                                    />
+                                </ListItem>
                             </List>
                         }
                     />
@@ -73,17 +104,13 @@ export const AdminPage = () => {
                         <PrivateRoute path="/admin/teachers/add" component={AddTeachersComponent}/>
                         <PrivateRoute path="/admin/teachers/update/:id" component={UpdateTeacherComponent}/>
                         <PrivateRoute path="/admin/teachers" component={TeachersComponent}/>
+                        <PrivateRoute path="/admin/custom/create" component={CustomPage}/>
+                        <PrivateRoute path="/admin/custom/header" component={EditHeaderComponent}/>
+                        <PrivateRoute path="/admin/custom/update/:url" component={UpdateCustomPage}/>
+                        <PrivateRoute path="/admin/custom" component={CustomPageListComponent}/>
                     </Switch>
                 </BrowserRouter>
             </Container>
-        </div>
-    )
-}
-
-const AdminStaticPage = () => {
-    return (
-        <div className={"AdminStaticPage"}>
-
         </div>
     )
 }

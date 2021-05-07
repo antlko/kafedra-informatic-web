@@ -12,23 +12,6 @@ import {getLectureRequest} from "../../api/requests";
 import {EDITOR_JS_TOOLS} from "../../Scripts/Editor";
 import {Editor} from "../../Editor";
 
-const defaultData = {
-    blocks: [
-        {
-            type: "paragraph",
-            data: {
-                text: "Редактируемая информация (пр. доцент, профессор...)"
-            }
-        },
-        {
-            type: "paragraph",
-            data: {
-                text: "Редактируемая информация о преподавателе."
-            }
-        },
-    ],
-}
-
 const useStyles = makeStyles(styles);
 
 export const TeachersPage = () => {
@@ -68,12 +51,12 @@ export const TeachersPage = () => {
                                 <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
                                     <h2>{teacher.description}</h2>
                                 </GridItem>
+                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
+                                    <h3>{teacher.email}</h3>
+                                </GridItem>
                                 <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "center"}}
                                           alignItems={"flex-start"}>
                                     {printFullInfo(teacher)}
-                                </GridItem>
-                                <GridItem xs={12} sm={12} md={12} style={{display: "flex", alignItems: "top"}}>
-                                    <h3>{teacher.email}</h3>
                                 </GridItem>
                             </GridContainer>
                         </GridItem>

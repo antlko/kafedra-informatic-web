@@ -1,8 +1,6 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useEffect, useState} from "react";
 // react components for routing our app without refresh
-import {Link} from "react-router-dom";
-
 // @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -14,129 +12,73 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import {getHeadersRequest} from "../../api/requests";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+
+    const [header, setHeader] = useState(null)
+
+    useEffect(() => {
+        getHeadersRequest()().then((value) => {
+            if (value.status === 200) {
+                setHeader(value.data)
+            }
+        })
+    }, [])
+
     const classes = useStyles();
+
+    const printHeaders = () => {
+        return header === undefined || header === null ? <div>Loading...</div>
+            : (
+                header.map((el) => {
+                    return el.sub.length === 0
+                        ? (
+                            <ListItem className={classes.listItem}>
+                                <Button
+                                    color="transparent"
+                                    target="_blank"
+                                    className={classes.navLink}
+                                    onClick={() => window.location.href = el.url}
+                                >
+                                    {el.name}
+                                </Button>
+                            </ListItem>
+                        )
+                        : (
+                            <ListItem className={classes.listItem}>
+                                <CustomDropdown
+                                    noLiPadding
+                                    buttonText={el.name}
+                                    buttonProps={{
+                                        className: classes.navLink,
+                                        color: "transparent"
+                                    }}
+                                    dropdownList={printDropDownList(el.sub)}
+                                />
+                            </ListItem>
+                        )
+                })
+            )
+    }
+
+    const printDropDownList = (sub) => {
+        let list = []
+        for (let i = 0; i < sub.length; i++) {
+            list[i] = (
+                <div className={classes.dropdownLink} onClick={() => window.location.href =sub[i].url}>
+                    {sub[i].name}
+                </div>
+            )
+        }
+        return list
+    }
+
     return (
         <List className={classes.list}>
-            <ListItem className={classes.listItem}>
-                <Button
-                    color="transparent"
-                    target="_blank"
-                    className={classes.navLink}
-                    onClick={() => window.location.href = "/"}
-                >
-                    Головна
-                </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <CustomDropdown
-                    noLiPadding
-                    buttonText="Про кафедру"
-                    buttonProps={{
-                        className: classes.navLink,
-                        color: "transparent"
-                    }}
-                    dropdownList={[
-                        <div className={classes.dropdownLink}>
-                            Історія Кафедри
-                        </div>,
-                        <div className={classes.dropdownLink} onClick={() => window.location.href = "/teachers"}>
-                            Колектив Кафедри
-                        </div>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Міжнародна співпраця
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Команії партнери
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Контакти
-                        </Link>,
-                    ]}
-                />
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <CustomDropdown
-                    noLiPadding
-                    buttonText="Освіта"
-                    buttonProps={{
-                        className: classes.navLink,
-                        color: "transparent"
-                    }}
-                    dropdownList={[
-                        <Link to="/" className={classes.dropdownLink}>
-                            Освітні програми
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Аспірантура
-                        </Link>,
-                    ]}
-                />
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <CustomDropdown
-                    noLiPadding
-                    buttonText="Наука"
-                    buttonProps={{
-                        className: classes.navLink,
-                        color: "transparent"
-                    }}
-                    dropdownList={[
-                        <Link to="/" className={classes.dropdownLink}>
-                            Напрямки наукових досліджень та наукові школи
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Науково-дослідницька робота студентів
-                        </Link>,
-                        <Link to="/" className={classes.dropdownLink}>
-                            Навчально-наукова лабораторія
-                        </Link>,
-                    ]}
-                />
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <Button
-                    color="transparent"
-                    target="_blank"
-                    className={classes.navLink}
-                    onClick={() => window.location.href = "/"}
-                >
-                    Вступнику
-                </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <Button
-                    color="transparent"
-                    target="_blank"
-                    className={classes.navLink}
-                    onClick={() => window.location.href = "/"}
-                >
-                    Студенту
-                </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <Button
-                    color="transparent"
-                    target="_blank"
-                    className={classes.navLink}
-                    onClick={() => window.location.href = "/"}
-                >
-                    Новини
-                </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <Button
-                    color="transparent"
-                    target="_blank"
-                    className={classes.navLink}
-                    onClick={() => window.location.href = "/"}
-                >
-                    Young Genius IT
-                </Button>
-            </ListItem>
+            {printHeaders()}
         </List>
     );
 }
