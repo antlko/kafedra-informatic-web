@@ -25,7 +25,7 @@ export const App = () => {
                 headers.forEach(h => {
                     if (h.sub.length > 0) {
                         h.sub.forEach(s => {
-                            if (!staticPages.includes(s.url.replace(/\s+/g, ''))) {
+                            if (s.url !== null && !staticPages.includes(s.url.replace(/\s+/g, ''))) {
                                 headersFull.push(s)
                             }
                         })
