@@ -1,7 +1,8 @@
 import axios from "axios";
 import {networkErrorMessage} from "./helpers";
+import toastr from "toastr";
 
-export const loginRequest = (loginForm) => {
+export const loginRequest = (loginForm, history) => {
     return async () => {
         await axios({
             method: 'post',
@@ -10,15 +11,15 @@ export const loginRequest = (loginForm) => {
         }).then((response) => {
             if (response.status === 200) {
                 console.log(response.data)
-                localStorage.setItem("access_token", response.data.token)
-                alert("User was logged successfully!")
-                window.location.href = "/admin"
+                localStorage.setItem("access_token", response.data.token);
+                toastr.success("User was logged successfully!");
+                history.push("/admin");
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
-                alert("User can't be logged")
+                toastr.error("User can't be logged")
             }
         })
     };
@@ -38,7 +39,7 @@ export const authRequest = async () => {
         if (err.response === undefined) {
             networkErrorMessage()
         } else {
-            alert(err.response.data.message)
+            toastr.error(err.response.data.message)
         }
         return false
     })
@@ -55,13 +56,13 @@ export const addLectureRequest = (addLectureForm) => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                alert("Lecture was added successfully!")
+                toastr.success("Lecture was added successfully!")
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
-                alert("Lecture cant be added")
+                toastr.error("Lecture cant be added")
             }
         })
     };
@@ -91,13 +92,13 @@ export const deleteTeacherRequest = (teacherID) => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                alert("Lecture was removed successfully!")
+                toastr.success("Lecture was removed successfully!")
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
-                alert("Lecture cant be removed")
+                toastr.error("Lecture cant be removed")
             }
         })
     };
@@ -149,14 +150,14 @@ export const saveHeaderRequest = (headerArray) => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                alert("Header was added successfully!")
+                toastr.success("Header was added successfully!")
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
                 console.log(err)
-                alert("Header cant be added")
+                toastr.error("Header cant be added")
             }
         })
     };
@@ -173,14 +174,14 @@ export const saveCustomPageRequest = (dataForm) => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                alert("Custom page was added successfully!")
+                toastr.success("Custom page was added successfully!")
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
                 console.log(err)
-                alert("Header cant be added")
+                toastr.error("Header cant be added")
             }
         })
     };
@@ -231,13 +232,13 @@ export const deleteCustomPageRequest = (url) => {
             }
         }).then((response) => {
             if (response.status === 200) {
-                alert("Page was removed successfully!")
+                toastr.success("Page was removed successfully!")
             }
         }).catch((err) => {
             if (err.response === undefined) {
                 networkErrorMessage()
             } else {
-                alert("Page cant be removed")
+                toastr.error("Page cant be removed")
             }
         })
     };

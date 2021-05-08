@@ -6,6 +6,7 @@ import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import People from "@material-ui/icons/People";
 // core components
+import {useHistory} from 'react-router-dom'
 import Header from "components/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -24,7 +25,7 @@ import {loginRequest} from "../../api/requests";
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
-
+    const history = useHistory();
     const [loginForm, setLoginForm] = useState({
         login: '',
         password: ''
@@ -109,7 +110,7 @@ export default function LoginPage(props) {
                                         />
                                     </CardBody>
                                     <CardFooter className={classes.cardFooter}>
-                                        <Button simple color="primary" size="lg" onClick={loginRequest(loginForm)}>
+                                        <Button simple color="primary" size="lg" onClick={loginRequest(loginForm, history)}>
                                             Login
                                         </Button>
                                     </CardFooter>

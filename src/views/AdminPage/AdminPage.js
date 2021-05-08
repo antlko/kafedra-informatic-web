@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Container} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -16,12 +16,30 @@ import {CustomPage} from "./CustomPage/CustomPage";
 import {EditHeaderComponent} from "./HeaderPages/EditHeaderComponent";
 import {CustomPageListComponent} from "./CustomPage/CustomPageListComponent";
 import {UpdateCustomPage} from "./CustomPage/UpdateCustomPage";
+import {useHistory} from "react-router-dom";
+import Select from 'react-select';
 
+const options = [
+    {value: 'teachers', label: 'Преподователи'}
+];
 const useStyles = makeStyles(styles);
 
 export const AdminPage = () => {
 
+    const [navbarStage, setNavbarStage] = useState(null);
+
+    let handleChange = (event) => {
+        if (event == null) {
+            setNavbarStage("");
+        } else {
+            setNavbarStage(event.value);
+        }
+    };
+
     const classes = useStyles();
+    const history = useHistory();
+
+    let navbar = getRenderInfo(classes, navbarStage);
 
     return (
         <div>
@@ -29,77 +47,54 @@ export const AdminPage = () => {
                 <BrowserRouter>
                     <Header
                         brand={"Admin Panel"}
-                        color="primary"
+                        color="white"
                         leftLinks={
                             <List className={classes.list}>
                                 <ListItem className={classes.listItem}>
                                     <Link to={"/admin"}>
                                         <Button
-                                            color="primary"
+                                            color="github"
                                             target="_blank"
                                             buttonProps={{
                                                 className: classes.navLink,
-                                                color: "transparent"
+                                                color: "white"
                                             }}
                                         >
                                             Главная
                                         </Button>
                                     </Link>
                                 </ListItem>
-                                <ListItem className={classes.listItem}>
-                                    <CustomDropdown
-                                        buttonText="Преподаватели"
-                                        dropdownHeader="Меню Преподавателей"
+                                {navbar}
+                            </List>
+                        }
+                        rightLinks={
+                            <List>
+                                <ListItem classes={classes.listItem}>
+                                    <Button
+                                        color="github"
+                                        target="_blank"
                                         buttonProps={{
                                             className: classes.navLink,
                                             color: "transparent"
                                         }}
-                                        dropdownList={[
-                                            <Link to={"/admin/teachers/add"}>
-                                                <div className={classes.dropdownLink}>
-                                                    Добавить
-                                                </div>
-                                            </Link>,
-                                            <Link to={"/admin/teachers"}>
-                                                <div className={classes.dropdownLink}>
-                                                    Обновить/Удалить
-                                                </div>
-                                            </Link>,
-                                        ]}
-
-                                    />
-                                </ListItem>
-                                <ListItem className={classes.listItem}>
-                                    <CustomDropdown
-                                        buttonText="Новая Страница"
-                                        dropdownHeader="Меню Создания новых страниц"
-                                        buttonProps={{
-                                            className: classes.navLink,
-                                            color: "transparent"
+                                        onClick={() => {
+                                            localStorage.removeItem("access_token");
+                                            history.push("/admin_informatics");
                                         }}
-                                        dropdownList={[
-                                            <Link to={"/admin/custom/header"}>
-                                                <div className={classes.dropdownLink}>
-                                                    Навбар (Хидер)
-                                                </div>
-                                            </Link>,
-                                            <Link to={"/admin/custom/create"}>
-                                                <div className={classes.dropdownLink}>
-                                                    Создать
-                                                </div>
-                                            </Link>,
-                                            <Link to={"/admin/custom"}>
-                                                <div className={classes.dropdownLink}>
-                                                    Обновить/Удалить
-                                                </div>
-                                            </Link>,
-                                        ]}
-                                    />
+                                    >
+                                        Выход
+                                    </Button>
                                 </ListItem>
                             </List>
                         }
                     />
-                    <h2>ADMIN Панель NURE-INF</h2>
+                    <Select
+                        options={options}
+                        isClearable={true}
+                        onChange={handleChange}
+                    >
+
+                    </Select>
                     <Switch>
                         <PrivateRoute path="/admin/teachers/add" component={AddTeachersComponent}/>
                         <PrivateRoute path="/admin/teachers/update/:id" component={UpdateTeacherComponent}/>
@@ -112,5 +107,60 @@ export const AdminPage = () => {
                 </BrowserRouter>
             </Container>
         </div>
-    )
-}
+    );
+};
+
+const getRenderInfo = (classes, navbarStage) => {
+    if (navbarStage === "teachers") {
+        return <ListItem className={classes.listItem}>
+            <CustomDropdown
+                buttonText="Преподаватели"
+                dropdownHeader="Меню Преподавателей"
+                buttonProps={{
+                    className: classes.navLink
+                }}
+                dropdownList={[
+                    <Link to={"/admin/teachers/add"}>
+                        <div className={classes.dropdownLink}>
+                            Добавить
+                        </div>
+                    </Link>,
+                    <Link to={"/admin/teachers"}>
+                        <div className={classes.dropdownLink}>
+                            Обновить/Удалить
+                        </div>
+                    </Link>,
+                ]}
+            />
+        </ListItem>
+    } else {
+        return <ListItem className={classes.listItem}>
+            <CustomDropdown
+                buttonText="Новая Страница"
+                dropdownHeader="Меню Создания новых страниц"
+                buttonProps={{
+                    className: classes.navLink,
+                    color: "black"
+                }}
+                dropdownList={[
+                    <Link to={"/admin/custom/header"}>
+                        <div className={classes.dropdownLink}>
+                            Навбар (Хидер)
+                        </div>
+                    </Link>,
+                    <Link to={"/admin/custom/create"}>
+                        <div className={classes.dropdownLink}>
+                            Создать
+                        </div>
+                    </Link>,
+                    <Link to={"/admin/custom"}
+                    >
+                        <div className={classes.dropdownLink}>
+                            Обновить/Удалить
+                        </div>
+                    </Link>,
+                ]}
+            />
+        </ListItem>
+    }
+};

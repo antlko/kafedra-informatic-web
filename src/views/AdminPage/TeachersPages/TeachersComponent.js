@@ -46,7 +46,7 @@ export const TeachersComponent = () => {
                         </GridItem>
                         <GridItem xs={3} sm={3} md={3} lg={3}>
                             <Button
-                                color="warning"
+                                color="github"
                                 target="_blank"
                                 className={classes.form}
                                 onClick={() => {
@@ -56,7 +56,10 @@ export const TeachersComponent = () => {
                                 Обновить
                             </Button>
                             <Button
-                                color="danger"
+                                style={{
+                                    marginLeft: 10
+                                }}
+                                color="github"
                                 target="_blank"
                                 className={classes.form}
                                 onClick={() => removeTeacher(t.id)}
@@ -67,7 +70,7 @@ export const TeachersComponent = () => {
                     </GridContainer>
                 </div>
             )
-            : <div>Loading...</div>
+            : <div>Данные не найдены...</div>
     }
 
     return (
@@ -77,10 +80,10 @@ export const TeachersComponent = () => {
                     <h3>ID</h3>
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3} lg={3}>
-                    <h3>NAME</h3>
+                    <h3>ФИО</h3>
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3} lg={3}>
-                    <h3>ACTIONS</h3>
+                    <h3>Возможности</h3>
                 </GridItem>
             </GridContainer>
             {printTeachers()}

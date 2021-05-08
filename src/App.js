@@ -1,15 +1,12 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
 import {AdminPage} from "./views/AdminPage/AdminPage";
-import {Route, Router, Switch} from "react-router-dom";
+import {Route, Switch, Redirect, BrowserRouter as Router} from "react-router-dom";
 import LoginPage from "./views/LoginPage/LoginPage";
 import LandingPage from "./views/LandingPage/LandingPage";
-import {createBrowserHistory} from "history";
 import {authRequest, getHeadersRequest} from "./api/requests";
 import {TeachersPage} from "./views/TeachersPage/TeachersPage";
 import {CustomPage} from "./views/CustomPage/CustomPage";
-
-let hist = createBrowserHistory();
 
 const staticPages = ["/", "/teachers", "/admin_informatics", "/admin"]
 
@@ -47,11 +44,11 @@ export const App = () => {
                 if (el.url)
                     return <Route path={el.url} component={() => <CustomPage url={el.url}/>}/>
             }) : <div>Loading...</div>
-    }
+    };
 
     return (
         <div className="App">
-            <Router history={hist}>
+            <Router>
                 <Switch>
                     <PrivateRoute path="/admin" component={AdminPage}/>
                     <Route path="/admin_informatics" component={LoginPage}/>
@@ -81,7 +78,7 @@ export const PrivateRoute = ({component: Component, ...rest}) => {
 
     return !isLoading ? (
         <Route {...rest} render={(props) => (
-            isAuth ? <Component {...props} /> : <div>{window.location.href = '/admin_informatics'}</div>
+            isAuth ? <Component {...props} /> : <div><Redirect to={"/admin_informatics"}/></div>
         )}/>
     ) : <h2>Loading...</h2>
 }

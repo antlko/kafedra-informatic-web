@@ -51,7 +51,12 @@ const navbarsStyle = theme => ({
     top: "4px",
     borderRadius: "50%",
     marginLeft: "5px"
+  },
+  navLink : {
+    background: "#333333",
+    marginLeft: "10%",
   }
+
 });
 
 export default navbarsStyle;

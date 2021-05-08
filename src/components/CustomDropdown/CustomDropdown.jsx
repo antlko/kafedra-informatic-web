@@ -161,6 +161,7 @@ class CustomDropdown extends React.Component {
                           key={key}
                           onClick={() => this.handleClose(prop)}
                           className={dropdownItem}
+
                         >
                           {prop}
                         </MenuItem>
@@ -179,7 +180,7 @@ class CustomDropdown extends React.Component {
 
 CustomDropdown.defaultProps = {
   caret: true,
-  hoverColor: "primary"
+    hoverColor: "primary"
 };
 
 CustomDropdown.propTypes = {

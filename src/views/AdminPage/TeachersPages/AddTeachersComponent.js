@@ -47,37 +47,37 @@ export const AddTeachersComponent = () => {
         email: '',
         description: '',
         info_json: JSON.stringify(defaultData),
-    })
+    });
 
     const printPhoto = () => {
         return photo !== '' ? <img src={photo.base64} alt="Avatar photo"/> : <div>...</div>;
-    }
+    };
 
     const onFormUpdate = (elem) => {
-        const form = addLectureForm
-        form[elem.id] = elem.value
+        const form = addLectureForm;
+        form[elem.id] = elem.value;
         setAddLectureForm(form)
-    }
+    };
 
     const updateDateEditor = (data) => {
-        const form = addLectureForm
-        form['info_json'] = data
+        const form = addLectureForm;
+        form['info_json'] = data;
         setAddLectureForm(form)
-    }
+    };
 
     const updatePhotoForm = (photo) => {
-        const form = addLectureForm
-        form['photo'] = photo.base64
-        setAddLectureForm(form)
-        setPhoto(photo)
-    }
+        const form = addLectureForm;
+        form['photo'] = photo.base64;
+        setAddLectureForm(form);
+        setPhoto(photo);
+    };
 
     return (
         <div className={"AddTeachersComponent"}>
             <form className={classes.form}>
                 <h2>Добавление Преподавателей</h2>
                 <Button
-                    color="primary"
+                    color="github"
                     target="_blank"
                     className={classes.form}
                     onClick={() => {
@@ -92,7 +92,7 @@ export const AddTeachersComponent = () => {
                     style={{
                         marginLeft: 20
                     }}
-                    color="secondary"
+                    color="github"
                     target="_blank"
                     className={classes.form}
                     onClick={() => {
