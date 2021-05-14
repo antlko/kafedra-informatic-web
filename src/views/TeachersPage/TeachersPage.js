@@ -86,7 +86,7 @@ export const TeachersPage = () => {
                 fixed
                 changeColorOnScroll={{
                     height: 100,
-                    color: "white"
+                    color: "black"
                 }}
             />
             <Parallax filter image={"/img/im1.jpg"}>

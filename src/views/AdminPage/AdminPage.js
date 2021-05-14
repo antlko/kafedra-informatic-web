@@ -20,7 +20,8 @@ import {useHistory} from "react-router-dom";
 import Select from 'react-select';
 
 const options = [
-    {value: 'teachers', label: 'Преподователи'}
+    {value: "teachers", label: "Преподователи"},
+    {value: "newPage", label: "Новая Страница"}
 ];
 const useStyles = makeStyles(styles);
 
@@ -88,13 +89,13 @@ export const AdminPage = () => {
                             </List>
                         }
                     />
-                    <Select
-                        options={options}
-                        isClearable={true}
-                        onChange={handleChange}
-                    >
-
-                    </Select>
+                        <h4 className="selectLabel">Выберете объект для роботы</h4>
+                        <Select
+                            className="select"
+                            options={options}
+                            isClearable={true}
+                            onChange={handleChange}
+                        />
                     <Switch>
                         <PrivateRoute path="/admin/teachers/add" component={AddTeachersComponent}/>
                         <PrivateRoute path="/admin/teachers/update/:id" component={UpdateTeacherComponent}/>
@@ -110,57 +111,68 @@ export const AdminPage = () => {
     );
 };
 
+const initMap = () => {
+    let mappingsMap = new Map();
+    mappingsMap.set("teachers", [
+        {
+            link: "/admin/teachers/add",
+            name: "Добавить"
+        },
+        {
+            link: "/admin/teachers",
+            name: "Обновить/Удалить"
+        }
+    ]);
+    mappingsMap.set("newPage", [
+        {
+            link: "/admin/custom/header",
+            name: "Добавить новую вкладку"
+        },
+        {
+            link: "/admin/custom/create",
+            name: "Создать новую страницу"
+        },
+        {
+            link: "/admin/custom",
+            name: "Обновить/Удалить страницу"
+        }
+    ]);
+    return mappingsMap;
+};
+
+const printByStage = (classes, navbarStage) => {
+    let stageElement = initMap().get(navbarStage);
+    if (stageElement === undefined) {
+        stageElement = initMap().get("newPage");
+    }
+    return stageElement.map(el => {
+        return (
+            <Link to={el.link}>
+                <div className={classes.dropdownLink}>
+                    {el.name}
+                </div>
+            </Link>
+        )
+    })
+};
+
+const setupButton = (classes, buttonText, dropdownHeader, navbarStage) => {
+    return <ListItem className={classes.listItem}>
+        <CustomDropdown
+            buttonText={buttonText}
+            dropdownHeader={dropdownHeader}
+            buttonProps={{
+                className: classes.navLink
+            }}
+            dropdownList={printByStage(classes, navbarStage)}
+        />
+    </ListItem>
+};
+
 const getRenderInfo = (classes, navbarStage) => {
     if (navbarStage === "teachers") {
-        return <ListItem className={classes.listItem}>
-            <CustomDropdown
-                buttonText="Преподаватели"
-                dropdownHeader="Меню Преподавателей"
-                buttonProps={{
-                    className: classes.navLink
-                }}
-                dropdownList={[
-                    <Link to={"/admin/teachers/add"}>
-                        <div className={classes.dropdownLink}>
-                            Добавить
-                        </div>
-                    </Link>,
-                    <Link to={"/admin/teachers"}>
-                        <div className={classes.dropdownLink}>
-                            Обновить/Удалить
-                        </div>
-                    </Link>,
-                ]}
-            />
-        </ListItem>
+        return setupButton(classes, "Преподователи", "Меню", navbarStage);
     } else {
-        return <ListItem className={classes.listItem}>
-            <CustomDropdown
-                buttonText="Новая Страница"
-                dropdownHeader="Меню Создания новых страниц"
-                buttonProps={{
-                    className: classes.navLink,
-                    color: "black"
-                }}
-                dropdownList={[
-                    <Link to={"/admin/custom/header"}>
-                        <div className={classes.dropdownLink}>
-                            Навбар (Хидер)
-                        </div>
-                    </Link>,
-                    <Link to={"/admin/custom/create"}>
-                        <div className={classes.dropdownLink}>
-                            Создать
-                        </div>
-                    </Link>,
-                    <Link to={"/admin/custom"}
-                    >
-                        <div className={classes.dropdownLink}>
-                            Обновить/Удалить
-                        </div>
-                    </Link>,
-                ]}
-            />
-        </ListItem>
+        return setupButton(classes, "Новая страница", "Меню страницы", navbarStage);
     }
 };

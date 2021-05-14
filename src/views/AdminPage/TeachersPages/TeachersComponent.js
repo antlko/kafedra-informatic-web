@@ -39,10 +39,10 @@ export const TeachersComponent = () => {
                 <div key={t.id} style={{paddingTop: 20}}>
                     <GridContainer>
                         <GridItem xs={3} sm={3} md={3} lg={3}>
-                            {t.id}
+                            {t.name}
                         </GridItem>
                         <GridItem xs={3} sm={3} md={3} lg={3}>
-                            {t.name}
+                            {t.description}
                         </GridItem>
                         <GridItem xs={3} sm={3} md={3} lg={3}>
                             <Button
@@ -77,10 +77,10 @@ export const TeachersComponent = () => {
         <div>
             <GridContainer>
                 <GridItem xs={3} sm={3} md={3} lg={3}>
-                    <h3>ID</h3>
+                    <h3>ФИО</h3>
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3} lg={3}>
-                    <h3>ФИО</h3>
+                    <h3>Должность</h3>
                 </GridItem>
                 <GridItem xs={3} sm={3} md={3} lg={3}>
                     <h3>Возможности</h3>

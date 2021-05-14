@@ -21,7 +21,7 @@ export const EditHeaderComponent = () => {
 
     const classes = useStyles();
 
-    const [header, setHeader] = useState([])
+    const [header, setHeader] = useState([]);
 
     useEffect(() => {
         getHeadersRequest()().then((value) => {
@@ -29,21 +29,21 @@ export const EditHeaderComponent = () => {
                 setHeader(value.data)
             }
         })
-    }, [])
+    }, []);
 
     useEffect(() => {
         console.log(header)
-    }, [header])
+    }, [header]);
 
     function updateElementName(array, id, value) {
         for (let i = 0; i < array.length; i++) {
             if (array[i].id === id) {
-                array[i].name = value
-                setHeader(array)
+                array[i].name = value;
+                setHeader(array);
                 return true
             }
             if (array[i].sub.length > 0 && updateElementName(array[i].sub, id, value)) {
-                setHeader(array)
+                setHeader(array);
                 return true
             }
         }
@@ -53,12 +53,12 @@ export const EditHeaderComponent = () => {
     function updateElementURL(array, id, value) {
         for (let i = 0; i < array.length; i++) {
             if (array[i].id === id) {
-                array[i].url = value
-                setHeader(array)
+                array[i].url = value;
+                setHeader(array);
                 return true
             }
             if (array[i].sub.length > 0 && updateElementURL(array[i].sub, id, value)) {
-                setHeader(array)
+                setHeader(array);
                 return true
             }
         }
