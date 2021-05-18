@@ -59,6 +59,7 @@
     "react-select": "^4.3.0",
     "react-slick": "0.26.1",
     "react-swipeable-views": "0.13.9",
+    "serve": "^11.3.2",
     "toastr": "^2.1.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
@@ -67,7 +68,6 @@
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
